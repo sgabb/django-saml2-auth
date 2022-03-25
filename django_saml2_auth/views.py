@@ -6,6 +6,8 @@
 import urllib.parse as urlparse
 from urllib.parse import unquote
 import json
+import logging
+logger = logging.getLogger(__name__)
 
 from dictor import dictor
 from django import get_version
@@ -110,6 +112,13 @@ def acs(request: HttpRequest):
             query = f"?token={jwt_token}"
 
         frontend_url = dictor(saml2_auth_settings, "FRONTEND_URL", next_url)
+        logger.info('**** saml2 auth settings ****')
+        print(saml2_auth_settings)
+        logger.info('**** Next url ****')
+        logger.info(next_url)
+        logger.info('**** frontend url & query ****')
+        logger.info(frontend_url)
+        logger.info(query)
 
         return HttpResponseRedirect(frontend_url + query)
 
