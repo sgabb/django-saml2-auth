@@ -103,6 +103,8 @@ def acs(request: HttpRequest):
 
         # Check if there is a custom trigger for creating the JWT and URL query
         custom_jwt_query_trigger = dictor(saml2_auth_settings, "TRIGGER.CUSTOM_TOKEN_QUERY")
+        logger.info('**** custom_jwt_query_trigger ****')
+        logger.info(custom_jwt_query_trigger)
         if custom_jwt_query_trigger:
             query = run_hook(custom_jwt_query_trigger, target_user)
         else:
